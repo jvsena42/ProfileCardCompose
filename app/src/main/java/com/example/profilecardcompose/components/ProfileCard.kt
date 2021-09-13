@@ -25,7 +25,8 @@ fun ProfileCard() {
             .padding(16.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
-        elevation = 8.dp
+        elevation = 8.dp,
+        backgroundColor = Color.White
     ) {
         Row(
             modifier = Modifier
@@ -40,7 +41,7 @@ fun ProfileCard() {
 }
 
 @Composable
-private fun ProfilePicture(){
+private fun ProfilePicture() {
     Card(
         shape = CircleShape,
         border = BorderStroke(width = 2.dp, color = Color.Green),
@@ -58,6 +59,18 @@ private fun ProfilePicture(){
 }
 
 @Composable
-private fun ProfileContent(){
-    Text(text = "João Victor")
+private fun ProfileContent() {
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        Text(text = "João Victor", style = MaterialTheme.typography.h5)
+
+        Text(
+            text = "Active Now",
+            style = MaterialTheme.typography.body2,
+            color = Color.LightGray
+        )
+    }
 }
