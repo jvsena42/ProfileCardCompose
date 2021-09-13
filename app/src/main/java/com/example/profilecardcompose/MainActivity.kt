@@ -3,6 +3,7 @@ package com.example.profilecardcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -12,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.profilecardcompose.components.AppBar
 import com.example.profilecardcompose.components.ProfileCard
+import com.example.profilecardcompose.model.UserProfile
 import com.example.profilecardcompose.ui.theme.ProfileCardComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +33,10 @@ fun MainScreen() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            ProfileCard()
+            Column {
+                ProfileCard(UserProfile(name = "João"))
+                ProfileCard(UserProfile(name = "Pedro",status = false))
+            }
         }
     }
 }

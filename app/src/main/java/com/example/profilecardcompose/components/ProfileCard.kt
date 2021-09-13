@@ -14,15 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.profilecardcompose.R
+import com.example.profilecardcompose.model.UserProfile
 
 @Composable
-@Preview
-fun ProfileCard() {
+fun ProfileCard(profile: UserProfile) {
     Card(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(horizontal = 16.dp,vertical = 8.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
         elevation = 8.dp,
@@ -34,22 +35,25 @@ fun ProfileCard() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
-            ProfilePicture()
-            ProfileContent()
+            ProfilePicture(profile.imgId, profile.status)
+            ProfileContent(profile.name, profile.status)
         }
     }
 }
 
 @Composable
-private fun ProfilePicture() {
+private fun ProfilePicture(id: Int, active: Boolean) {
     Card(
         shape = CircleShape,
-        border = BorderStroke(width = 2.dp, color = Color.Green),
+        border = BorderStroke(
+            width = 2.dp,
+            color = if (active) Color.Green else Color.Red
+        ),
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
     ) {
         Image(
-            painter = painterResource(id = R.drawable.profile),
+            painter = painterResource(id = id),
             contentDescription = "",
             modifier = Modifier.size(72.dp),
             contentScale = ContentScale.Crop
@@ -59,16 +63,16 @@ private fun ProfilePicture() {
 }
 
 @Composable
-private fun ProfileContent() {
+private fun ProfileContent(name: String, active: Boolean) {
     Column(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
     ) {
-        Text(text = "João Victor", style = MaterialTheme.typography.h5)
+        Text(text = name, style = MaterialTheme.typography.h5)
 
         Text(
-            text = "Active Now",
+            text = if(active) "Active Now" else "Offline",
             style = MaterialTheme.typography.body2,
             color = Color.LightGray
         )
