@@ -5,6 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.profilecardcompose.components.AppBar
 import com.example.profilecardcompose.components.ProfileCard
 import com.example.profilecardcompose.model.UserProfile
+import com.example.profilecardcompose.model.userProfileList
 import com.example.profilecardcompose.ui.theme.ProfileCardComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,14 +31,15 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(userProfiles: List<UserProfile> = userProfileList) {
     Scaffold(topBar = { AppBar() }) {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            Column {
-                ProfileCard(UserProfile(name = "João"))
-                ProfileCard(UserProfile(name = "Pedro",status = false))
+            LazyColumn {
+                items(userProfiles){ userProfile ->
+                    ProfileCard(profile = userProfile)
+                }
             }
         }
     }

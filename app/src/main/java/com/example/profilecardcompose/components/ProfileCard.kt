@@ -16,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import com.example.profilecardcompose.R
 import com.example.profilecardcompose.model.UserProfile
 
@@ -42,7 +44,7 @@ fun ProfileCard(profile: UserProfile) {
 }
 
 @Composable
-private fun ProfilePicture(id: Int, active: Boolean) {
+private fun ProfilePicture(id: String, active: Boolean) {
     Card(
         shape = CircleShape,
         border = BorderStroke(
@@ -53,11 +55,21 @@ private fun ProfilePicture(id: Int, active: Boolean) {
         elevation = 4.dp
     ) {
         Image(
+            painter = rememberImagePainter(id,
+                builder = {
+                    crossfade(true)
+                    placeholder(R.drawable.profile)
+                    transformations(CircleCropTransformation())
+                }),
+            contentDescription = null,
+            modifier = Modifier.size(72.dp),
+        )
+        /*Image(
             painter = painterResource(id = id),
             contentDescription = "",
             modifier = Modifier.size(72.dp),
             contentScale = ContentScale.Crop
-        )
+        )*/
     }
 
 }
