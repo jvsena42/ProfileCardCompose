@@ -11,10 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
@@ -44,7 +41,7 @@ fun ProfileCard(profile: UserProfile) {
 }
 
 @Composable
-private fun ProfilePicture(id: String, active: Boolean) {
+fun ProfilePicture(id: String, active: Boolean, imageSize: Dp = 72.dp) {
     Card(
         shape = CircleShape,
         border = BorderStroke(
@@ -62,24 +59,18 @@ private fun ProfilePicture(id: String, active: Boolean) {
                     transformations(CircleCropTransformation())
                 }),
             contentDescription = null,
-            modifier = Modifier.size(72.dp),
+            modifier = Modifier.size(imageSize),
         )
-        /*Image(
-            painter = painterResource(id = id),
-            contentDescription = "",
-            modifier = Modifier.size(72.dp),
-            contentScale = ContentScale.Crop
-        )*/
     }
 
 }
 
 @Composable
-private fun ProfileContent(name: String, active: Boolean) {
+fun ProfileContent(name: String, active: Boolean, alignment: Alignment.Horizontal = Alignment.Start) {
     Column(
         modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalAlignment = alignment
     ) {
         Text(text = name, style = MaterialTheme.typography.h5)
 
