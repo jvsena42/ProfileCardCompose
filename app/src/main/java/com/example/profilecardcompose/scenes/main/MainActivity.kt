@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.profilecardcompose.model.UserProfile
 import com.example.profilecardcompose.model.userProfileList
 import com.example.profilecardcompose.ui.theme.ProfileCardComposeTheme
@@ -30,8 +32,13 @@ fun UsersApplication(userProfiles: List<UserProfile> = userProfileList){
         composable("users_list"){
             UserListScreen(userProfiles = userProfiles,navController = navController)
         }
-        composable("user_details"){
-            UserProfileDetailsScreen()
+        composable(
+            route ="user_details/{userId}",
+            arguments = listOf(navArgument("userId"){
+                type = NavType.IntType
+            })
+        ){
+            UserProfileDetailsScreen(it.arguments!!.getInt("userId",0))
         }
     }
 

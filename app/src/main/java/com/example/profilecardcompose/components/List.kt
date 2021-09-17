@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import com.example.profilecardcompose.model.UserProfile
 
 @Composable
-fun ListProfileCards(items:List<UserProfile>,clickAction: () -> Unit){
+fun ListProfileCards(items:List<UserProfile>, clickAction: () -> Unit){
     LazyColumn {
         items(items){ userProfile ->
             ProfileCard(profile = userProfile){

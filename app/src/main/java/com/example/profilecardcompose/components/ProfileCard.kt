@@ -50,11 +50,12 @@ fun ProfilePicture(id: String, active: Boolean, imageSize: Dp = 72.dp) {
             width = 2.dp,
             color = if (active) Color.Green else Color.Red
         ),
-        modifier = Modifier.padding(16.dp),
-        elevation = 4.dp
+        elevation = 4.dp,
+        modifier = Modifier.padding(16.dp)
     ) {
         Image(
-            painter = rememberImagePainter(id,
+            painter = rememberImagePainter(
+                id,
                 builder = {
                     crossfade(true)
                     placeholder(R.drawable.profile)

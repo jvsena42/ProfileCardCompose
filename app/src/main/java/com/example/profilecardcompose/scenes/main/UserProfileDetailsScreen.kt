@@ -15,8 +15,8 @@ import com.example.profilecardcompose.model.UserProfile
 import com.example.profilecardcompose.model.userProfileList
 
 @Composable
-@Preview
-fun UserProfileDetailsScreen(userProfile: UserProfile = userProfileList.first()) {
+fun UserProfileDetailsScreen(userId: Int) {
+    val userProfile = userProfileList.first { userProfile -> userId == userProfile.id  }
     Scaffold(topBar = { AppBar() }) {
         Surface(
             modifier = Modifier.fillMaxSize()
