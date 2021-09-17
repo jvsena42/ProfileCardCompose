@@ -38,7 +38,7 @@ fun UsersApplication(userProfiles: List<UserProfile> = userProfileList){
                 type = NavType.IntType
             })
         ){
-            UserProfileDetailsScreen(it.arguments!!.getInt("userId",0))
+            UserProfileDetailsScreen(it.arguments!!.getInt("userId",0),navController)
         }
     }
 
